@@ -56,34 +56,31 @@
 		<script>
 
 
-			function dataBreakBehaviours(){
-
-				var allDataBreakElements = document.querySelectorAll('[data-break]');
-				
-				function callWindowSize(){
-					var winWidth = document.documentElement.clientWidth;
+				function dataBreakBehaviours(){
 					
-					for(var iBreak = 0; allDataBreakElements[iBreak]; iBreak ++ ){
-						var elementBreak = allDataBreakElements[iBreak].getAttribute('data-break');
+					const myDataBreakElements = document.querySelectorAll('[data-break]');
 	
-						if(winWidth <= elementBreak){
-							if(!allDataBreakElements[iBreak].classList.contains('collapsed')){
-								allDataBreakElements[iBreak].classList = allDataBreakElements[iBreak].classList + ' collapsed';
-							}
-						}else{
-							allDataBreakElements[iBreak].classList.remove('collapsed');
+					for(let iBreak = 0; myDataBreakElements[iBreak]; iBreak ++ ){
+	
+						let myElementBreak = myDataBreakElements[iBreak].getAttribute('data-break');
+
+						let myMatchMedia = matchMedia('(max-width: ' + myElementBreak + 'px)');
+						let changeSize = (myMediaQuery) =>{
+							myMediaQuery.matches
+								? myDataBreakElements[iBreak].classList = myDataBreakElements[iBreak].classList + ' collapsed'
+								: myDataBreakElements[iBreak].classList.remove('collapsed')
 						}
+		
+						myMatchMedia.addListener(changeSize);
+						changeSize(myMatchMedia);
+	
 					}
 	
-				}	
-					
-				window.addEventListener("resize", callWindowSize);
-
-			}
-
-			window.onload = function(){
-				dataBreakBehaviours()
-			}
+				}
+	
+				window.onload = function(){
+					dataBreakBehaviours();
+				}
 
 
 		</script>
