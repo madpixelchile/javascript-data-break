@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width">
+		<title></title>
+		<meta name="description" content="" />
+		<meta name="theme-color" content="#191C33" />
+
+		<style>
+			.my-box{
+				background: #ccc;
+				color: #333;
+			}
+
+			.my-box.collapsed{
+				background: #333;
+				color: white;
+			}
+		</style>
+
+	</head>
+
+
+	<body>
+
+		<main>
+
+			
+			<div class="my-box" data-break="992">
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+					sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+					Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+					deserunt mollit anim id est laborum.
+				</p>
+			</div>
+			<div class="my-box" data-break="768">
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+					sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+					Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+					deserunt mollit anim id est laborum.
+				</p>
+			</div>
+				
+
+		</main>
+
+		<script>
+
+
+			function dataBreakBehaviours(){
+
+				var allDataBreakElements = document.querySelectorAll('[data-break]');
+				
+				function callWindowSize(){
+					var winWidth = document.documentElement.clientWidth;
+					
+					for(var iBreak = 0; allDataBreakElements[iBreak]; iBreak ++ ){
+						var elementBreak = allDataBreakElements[iBreak].getAttribute('data-break');
+	
+						if(winWidth <= elementBreak){
+							if(!allDataBreakElements[iBreak].classList.contains('collapsed')){
+								allDataBreakElements[iBreak].classList = allDataBreakElements[iBreak].classList + ' collapsed';
+							}
+						}else{
+							allDataBreakElements[iBreak].classList.remove('collapsed');
+						}
+					}
+	
+				}	
+					
+				window.addEventListener("resize", callWindowSize);
+
+			}
+
+			window.onload = function(){
+				dataBreakBehaviours()
+			}
+
+
+		</script>
+
+	</body>
+</html>
